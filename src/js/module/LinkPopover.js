@@ -52,10 +52,11 @@ export default class LinkPopover {
 
   update() {
     // Prevent focusing on editable when invoke('code') is executed
-    if (!this.context.invoke('editor.hasFocus')) {
-      this.hide();
-      return;
-    }
+    // TODO-YRX: The if below is temporarily commented to make the link popover work in M2BPO website (until we find a proper way to make it work)
+    // if (!this.context.invoke('editor.hasFocus')) {
+    //   this.hide();
+    //   return;
+    // }
 
     const rng = this.context.invoke('editor.getLastRange');
     if (rng.isCollapsed() && rng.isOnAnchor()) {
