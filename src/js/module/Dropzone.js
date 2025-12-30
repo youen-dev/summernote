@@ -72,7 +72,8 @@ export default class Dropzone {
     // -but only if the editor is visible, i.e. has a positive width and height
     this.$eventListener.on('dragenter', this.documentEventHandlers.onDragenter)
       .on('dragleave', this.documentEventHandlers.onDragleave)
-      .on('drop', this.documentEventHandlers.onDrop);
+      .on('drop', this.documentEventHandlers.onDrop)
+      .on('dragend', this.documentEventHandlers.onDrop);
 
     // change dropzone's message on hover.
     this.$dropzone.on('dragenter', () => {
