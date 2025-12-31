@@ -105,6 +105,11 @@ export default class Dropzone {
           if (this.options.keepTextOnlyOnDrop && type !== 'text/plain') {
             return;
           }
+          else if (!this.options.keepTextOnlyOnDrop && dataTransfer.types.indexOf('text/html') > -1 && type !== 'text/html') {
+            // If the data transfer object has type 'text/html', we only
+            // keep this type to not insert content multiple times on drop.
+            return;
+          }
           if (type.toLowerCase().indexOf('text') > -1) {
             this.context.invoke('editor.pasteHTML', content);
           } else {
