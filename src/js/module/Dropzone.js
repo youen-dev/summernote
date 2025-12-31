@@ -91,7 +91,7 @@ export default class Dropzone {
       // stop the browser from opening the dropped content
       event.preventDefault();
 
-      if (dataTransfer && dataTransfer.files && dataTransfer.files.length) {
+      if (!this.options.keepTextOnlyOnDrop && dataTransfer && dataTransfer.files && dataTransfer.files.length) {
         this.$editable.trigger('focus');
         this.context.invoke('editor.insertImagesOrCallback', dataTransfer.files);
       } else {
@@ -102,6 +102,9 @@ export default class Dropzone {
           }
           const content = dataTransfer.getData(type);
 
+          if (this.options.keepTextOnlyOnDrop && type !== 'text/plain') {
+            return;
+          }
           if (type.toLowerCase().indexOf('text') > -1) {
             this.context.invoke('editor.pasteHTML', content);
           } else {
